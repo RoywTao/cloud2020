@@ -21,7 +21,11 @@ public class OrderController {
     @Resource
     private RestTemplate restTemplate;
 
-    public static final String PAYMENT_URL = "http://localhost:8001";
+    // 单机版本
+    // public static final String PAYMENT_URL = "http://localhost:8001";
+
+    // 集群负载均衡版本
+    public static final String PAYMENT_URL = "http://cloud-payment-service";
 
     @GetMapping("/consumer/payment/add")
     public CommonResult<Payment> add(Payment payment){

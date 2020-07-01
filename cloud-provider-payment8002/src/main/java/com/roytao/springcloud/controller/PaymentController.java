@@ -22,6 +22,7 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
+
     @PostMapping(value = "/payment/add")
     public CommonResult add(@RequestBody Payment payment){
         int result = paymentService.add(payment);
