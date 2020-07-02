@@ -20,11 +20,10 @@ public class OrderController {
 
     @Resource
     private RestTemplate restTemplate;
-
     // 单机版本
     // public static final String PAYMENT_URL = "http://localhost:8001";
 
-    // 集群负载均衡版本
+    // 集群负载均衡版本 只需声明服务名称 通过负载均衡可以去轮询请求已配置的服务实例
     public static final String PAYMENT_URL = "http://cloud-payment-service";
 
     @GetMapping("/consumer/payment/add")

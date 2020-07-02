@@ -9,8 +9,8 @@ eureka:
     register-with-eureka: true
     #表示是否从Eureka拉取注册信息 默认为true
     fetch-registry: true
-    service-url:
+    service-url: # 配置eureka服务端的地址
       # 单机版本
       # defaultZone: http://localhost:7001/eureka/
-      # 集群版本
+      # 集群版本 注意以下的eureka7001.com, eureka7002.com在hosts文件已配置过 其实指向的是本机 127.0.0.1
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
