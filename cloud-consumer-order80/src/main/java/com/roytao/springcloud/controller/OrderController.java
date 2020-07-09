@@ -3,6 +3,7 @@ package com.roytao.springcloud.controller;
 import com.roytao.springcloud.entity.CommonResult;
 import com.roytao.springcloud.entity.Payment;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,19 @@ public class OrderController {
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id){
         log.info("请求到consumer端 url:"+"/consumer/payment/get/{id}");
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,CommonResult.class);
+    }
+
+    // 使用restTemplate的getForEntity方法获取更详细的请求信息
+    @GetMapping("/consumer/payment/getForEntity/{id}")
+    public CommonResult<Payment> getPaymentForEntity(@PathVariable("id") Long id){
+        log.info("请求到consumer端 url:"+"/consumer/payment/get/{id}");
+        ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+        log.info("entity message:"+entity.getHeaders()+"  "+entity.getStatusCode());
+        if(entity.getStatusCode().is2xxSuccessful()){
+            return entity.getBody();
+        }else{
+            return new CommonResult(400,"failed");
+        }
     }
 
 }
